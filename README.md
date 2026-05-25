@@ -1,32 +1,92 @@
-# Pistachio Landing Page
+<div align="center">
 
-Portfolio em Next.js 14 com landing publica, galeria, Comissoes Feitas e painel admin protegido.
+# 🐾 Pistachio Portfolio
 
-## Rodar localmente
+### Portfolio artístico responsivo com galeria, comissões e painel administrativo
+
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Storage%20%2B%20DB-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-111827?style=for-the-badge&logo=vercel)](https://vercel.com/)
+
+</div>
+
+---
+
+## ✨ Visão geral
+
+**Pistachio Portfolio** é um site artístico em Next.js criado para apresentar trabalhos, preços, comissões feitas e informações de contato de forma visual, responsiva e fácil de administrar.
+
+O projeto combina uma landing pública com uma área admin protegida, permitindo atualizar galeria, comissões, imagens e conteúdos sem precisar mexer diretamente no código. Afinal, um artista precisa criar — não lutar contra arquivos como se fossem pequenos demônios burocráticos.
+
+---
+
+## 🧩 Funcionalidades
+
+### Página pública
+- Landing page responsiva
+- Galeria de artes
+- Área de “Comissões Feitas”
+- Seção de preços
+- Links e informações de contato
+- Suporte a textos em português e inglês
+
+### Painel administrativo
+- Login protegido por senha
+- Adicionar, editar, ativar/desativar e excluir itens da galeria
+- Adicionar, editar, ativar/desativar e excluir comissões feitas
+- Upload de imagens para o Supabase Storage
+- Reset de galeria e comissões para dados padrão
+
+### Estrutura de dados
+- Metadados salvos no Supabase Postgres
+- Imagens salvas no Supabase Storage
+- URLs públicas/CDN para carregamento das artes
+- Chave `SUPABASE_SERVICE_ROLE_KEY` usada somente no servidor
+
+---
+
+## 🛠️ Stack
+
+| Camada | Tecnologias |
+|---|---|
+| Framework | Next.js 14 |
+| Linguagem | TypeScript |
+| Interface | React, CSS/Tailwind conforme estrutura do projeto |
+| Banco | Supabase Postgres |
+| Storage | Supabase Storage |
+| Admin | Rotas API serverless do Next.js |
+| Deploy | Vercel |
+
+---
+
+## 🚀 Rodar localmente
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abra `http://localhost:3000`.
+Abra:
 
-## Banco recomendado
+```txt
+http://localhost:3000
+```
 
-Use Supabase:
+---
 
-- Supabase Postgres para salvar os metadados da galeria e das comissoes feitas.
-- Supabase Storage para salvar os arquivos de imagem.
-- O banco fica no servidor, usando `SUPABASE_SERVICE_ROLE_KEY` somente em rotas API do Next.js. Essa chave nunca deve virar `NEXT_PUBLIC_*`.
-
-Esse modelo e melhor que salvar imagem binaria no Postgres: o banco guarda titulo, cliente, categoria, status e URL; o Storage entrega os arquivos com CDN/public URL.
-
-## Configurar Supabase
+## 🔐 Configurar Supabase
 
 1. Crie um projeto no Supabase.
-2. Abra o SQL Editor e rode o conteudo de `supabase/schema.sql`.
-3. Crie `.env.local` a partir de `.env.example`.
-4. Preencha:
+2. Abra o SQL Editor.
+3. Rode o conteúdo de:
+
+```txt
+supabase/schema.sql
+```
+
+4. Crie `.env.local` a partir de `.env.example`.
+5. Preencha:
 
 ```env
 SUPABASE_URL=https://seu-projeto.supabase.co
@@ -36,36 +96,70 @@ ADMIN_PASSWORD=uma-senha-forte
 ADMIN_SESSION_SECRET=um-segredo-grande-e-aleatorio
 ```
 
-## Admin
+> A `SUPABASE_SERVICE_ROLE_KEY` nunca deve virar variável `NEXT_PUBLIC_*`. Ela pertence ao servidor. Expor isso no front-end seria basicamente entregar a chave do cofre e perguntar por que sumiu ouro.
 
-Abra `http://localhost:3000/admin`.
+---
 
-O admin permite:
+## 🖼️ Admin
 
-- adicionar, editar, ativar/desativar e excluir itens da Galeria;
-- adicionar, editar, ativar/desativar e excluir Comissoes Feitas;
-- enviar imagens do computador para o Supabase Storage;
-- resetar Galeria e Comissoes Feitas para os dados padrao.
+Acesse:
 
-## Deploy na Vercel
+```txt
+http://localhost:3000/admin
+```
 
-1. Suba o projeto para um repositorio.
+O admin permite gerenciar:
+
+- Galeria
+- Comissões feitas
+- Uploads de imagem
+- Dados padrão
+- Conteúdo visual do portfolio
+
+---
+
+## 🌐 Deploy na Vercel
+
+1. Suba o projeto para um repositório GitHub.
 2. Importe na Vercel como projeto Next.js.
-3. Configure as mesmas variaveis de ambiente do `.env.local`.
+3. Configure as variáveis de ambiente do `.env.local`.
 4. Rode o deploy normalmente.
 
-Importante: este projeto nao usa `output: 'export'`, porque precisa de rotas API serverless para admin, upload e banco.
+Importante:
 
-## Onde editar
+```txt
+Este projeto não usa output: 'export'
+```
 
-- Galeria padrao: `src/data/gallery.ts`
-- Comissoes feitas padrao: `src/data/commissions.ts`
-- Precos: `src/data/prices.ts`
-- Links: `src/data/links.ts`
-- Textos PT/EN: `src/data/translations.ts`
-- Configuracoes gerais: `src/data/settings.ts`
-- Landing: `src/app/page.tsx`
-- Admin: `src/app/admin/page.tsx`
-- Camada de banco: `src/lib/content-store.ts`
-- Schema do Supabase: `supabase/schema.sql`
+Ele precisa de rotas API serverless para admin, upload e banco de dados.
 
+---
+
+## 🗂️ Onde editar
+
+```txt
+src/data/gallery.ts          -> Galeria padrão
+src/data/commissions.ts      -> Comissões feitas padrão
+src/data/prices.ts           -> Preços
+src/data/links.ts            -> Links
+src/data/translations.ts     -> Textos PT/EN
+src/data/settings.ts         -> Configurações gerais
+src/app/page.tsx             -> Landing pública
+src/app/admin/page.tsx       -> Painel admin
+src/lib/content-store.ts     -> Camada de banco
+supabase/schema.sql          -> Estrutura do Supabase
+```
+
+---
+
+## 📄 Licença
+
+Projeto privado/proprietário. Uso, cópia ou distribuição dependem de autorização.
+
+---
+
+<div align="center">
+
+### Um portfolio artístico não deveria apenas mostrar imagens. Deveria criar vontade de encomendar a próxima.
+
+</div>
